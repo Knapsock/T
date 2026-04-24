@@ -3,8 +3,15 @@ const cors = require('cors');
 const { processEdges } = require('./processor');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL : '*',
+    methods: ['GET', 'POST']
+}));
 app.use(express.json());
+
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
 app.post('/bfhl', (req, res) => {
     try {
