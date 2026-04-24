@@ -23,7 +23,8 @@ function App() {
         .map(s => s.trim())
         .filter(s => s !== '');
 
-      const res = await fetch('http://localhost:8080/bfhl', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const res = await fetch(`${apiUrl}/bfhl`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
